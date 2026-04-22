@@ -1,0 +1,22 @@
+# Data Science & ML
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+
+# API & Backend
+fastapi
+uvicorn
+python-dotenv
+psycopg2-binary
+redis
+
+# GenAI
+langchain
+openai
+chromadb
+sentence-transformers
+
+# UI
+streamlit

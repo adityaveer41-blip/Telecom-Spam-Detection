@@ -1,0 +1,24 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.egg-info/
+
+# Data files - heavy hain, GitHub pe nahi jaani
+data/raw/
+data/processed/
+
+# Model artifacts
+models/artifacts/
+*.pkl
+
+# Mac system files
+.DS_Store
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
