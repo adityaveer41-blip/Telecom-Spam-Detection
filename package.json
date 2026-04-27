@@ -1,0 +1,24 @@
+{
+  "name": "telecom-spam-detection",
+  "version": "1.0.0",
+  "description": "> End-to-End ML + GenAI System for Voice Spam Detection",
+  "main": "internship_report.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adityaveer41-blip/Telecom-Spam-Detection.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/adityaveer41-blip/Telecom-Spam-Detection/issues"
+  },
+  "homepage": "https://github.com/adityaveer41-blip/Telecom-Spam-Detection#readme",
+  "dependencies": {
+    "docx": "^9.6.1"
+  }
+}
