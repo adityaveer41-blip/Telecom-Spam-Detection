@@ -76,21 +76,21 @@ SUMMARY: [one sentence overall verdict]
 #TESTING 
 if __name__ == "__main__":
     fraud_case= {
-        'Account Length':65,
+        'Account Length':82,
         'VMail Message':0,
-        'Day Mins':129.1,
-        'Day Calls':137,
-        'Day Charge':21.95,
-        'Eve Mins':228.5,
-        'Eve Calls':83,
-        'Eve Charge':19.42,
-        'Night Mins':208.8,
-        'Night Calls':111,
-        'Night Charge':9.4,
-        'Intl Mins':12.7,
-        'Intl Calls':6,
-        'Intl Charge':3.34,
-        'CustServ Calls':4
+        'Day Mins':300.3,
+        'Day Calls':109,
+        'Day Charge':51.05,
+        'Eve Mins':181.0,
+        'Eve Calls':100,
+        'Eve Charge':15.39,
+        'Night Mins':270.1,
+        'Night Calls':73,
+        'Night Charge':12.15,
+        'Intl Mins':11.7,
+        'Intl Calls':4,
+        'Intl Charge':3.16,
+        'CustServ Calls':0
     }
 
 print("\n" + "="* 50)
