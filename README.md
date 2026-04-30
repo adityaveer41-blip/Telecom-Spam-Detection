@@ -9,9 +9,9 @@ An internship project to build a production-grade telecom voice spam detection s
 |---|---|
 | EDA | ✅ Complete |
 | Feature Engineering | ✅ Complete |
-| Baseline Modelling | 🟡 In Progress |
-| Advanced Modelling (XGBoost, SHAP) | 🔴 Pending |
-| GenAI Module | 🔴 Pending |
+| Baseline Modelling | ✅ Complete |
+| Advanced Modelling (XGBoost, SHAP) | ✅ Complete |
+| GenAI Module | In Progress |
 | FastAPI Backend | 🔴 Pending |
 | Streamlit Dashboard | 🔴 Pending |
 | Docker Compose | 🔴 Pending |
