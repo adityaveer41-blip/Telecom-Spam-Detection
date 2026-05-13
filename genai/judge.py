@@ -75,33 +75,31 @@ SUMMARY: [one sentence overall verdict]
 
 #TESTING 
 if __name__ == "__main__":
-    fraud_case= {
-        'Account Length':82,
-        'VMail Message':0,
-        'Day Mins':300.3,
-        'Day Calls':109,
-        'Day Charge':51.05,
-        'Eve Mins':181.0,
-        'Eve Calls':100,
-        'Eve Charge':15.39,
-        'Night Mins':270.1,
-        'Night Calls':73,
-        'Night Charge':12.15,
-        'Intl Mins':11.7,
-        'Intl Calls':4,
-        'Intl Charge':3.16,
-        'CustServ Calls':0
+    fraud_case = {
+        'Account Length': 82,
+        'VMail Message': 0,
+        'Day Mins': 300.3,
+        'Day Calls': 109,
+        'Day Charge': 51.05,
+        'Eve Mins': 181.0,
+        'Eve Calls': 100,
+        'Eve Charge': 15.39,
+        'Night Mins': 270.1,
+        'Night Calls': 73,
+        'Night Charge': 12.15,
+        'Intl Mins': 11.7,
+        'Intl Calls': 4,
+        'Intl Charge': 3.16,
+        'CustServ Calls': 0
     }
 
-print("\n" + "="* 50)
-print("LLM-AS-JUDGE - EXPLANATIONQUALITY CHECK")
-print("="*50)
+    print("\n" + "="*50)
+    print("LLM-AS-JUDGE - EXPLANATION QUALITY CHECK")
+    print("="*50)
 
-result= judge_explanation(fraud_case)
+    result = judge_explanation(fraud_case)
 
-print(f"\nFraud Probability : {result['fraud_probability']*100:.1f}%")
-print(f"Is Fraud: {result['is_fraud']}")
-print(f"\nGenerated Explanation:\n {result['explanation']}")
-print(f"\nJudge Verdict:\n{result['judge_verdict']}")
-
-
+    print(f"\nFraud Probability : {result['fraud_probability']*100:.1f}%")
+    print(f"Is Fraud: {result['is_fraud']}")
+    print(f"\nGenerated Explanation:\n {result['explanation']}")
+    print(f"\nJudge Verdict:\n{result['judge_verdict']}")

@@ -139,7 +139,7 @@ def scrape_trai_documents() -> list:
     scraped_docs = []
 
     for item in TRAI_URLS:
-        print(f"\n📥 {item['title']}")
+        print(f"\n {item['title']}")
         content = scrape_url(item['url'], item['title'])
 
         if content and len(content) > 200:
