@@ -2,7 +2,7 @@
 > End-to-End ML + GenAI System for Telecom Fraud Detection
 
 ## Overview
-A production-grade telecom fraud detection system that analyzes Call Detail Records (CDR) to identify fraudulent callers. The system combines a trained Random Forest ML model with a GenAI layer — LLM-powered explanations, LLM-as-Judge quality evaluation, and a RAG pipeline grounded in TRAI regulations.
+A production-grade telecom fraud detection system that analyzes Call Detail Records (CDR) to identify fraudulent callers. The system combines a trained Random Forest ML model with a GenAI layer — LLM-powered explanations, LLM-as-Judge quality evaluation, and a RAG pipeline grounded in TRAI regulations. A Streamlit dashboard provides a visual analyst interface, and the entire backend is containerized with Docker Compose.
 
 ---
 
@@ -16,8 +16,8 @@ A production-grade telecom fraud detection system that analyzes Call Detail Reco
 | GenAI — Judge | LLM-as-Judge explanation quality evaluation | ✅ Complete |
 | GenAI — RAG | ChromaDB + TRAI knowledge base + RAG query pipeline | ✅ Complete |
 | FastAPI Backend | /score, /explain, /query endpoints | ✅ Complete |
-| Streamlit Dashboard | Visual UI for analysts | 🔄 In Progress |
-| Docker Compose | Containerized deployment | 🔄 In Progress |
+| Streamlit Dashboard | 4-page visual UI for analysts | ✅ Complete |
+| Docker Compose | API + ChromaDB containerized | ✅ Complete |
 
 ---
 
@@ -27,8 +27,8 @@ A production-grade telecom fraud detection system that analyzes Call Detail Reco
 | ML | Scikit-learn, Random Forest, SHAP |
 | GenAI | Ollama, LLaMA3, ChromaDB, Sentence Transformers |
 | Backend | FastAPI, Uvicorn, Pydantic |
-| Frontend | Streamlit (in progress) |
-| DevOps | Docker Compose (in progress) |
+| Frontend | Streamlit |
+| DevOps | Docker Compose, Docker |
 
 ---
 
@@ -51,10 +51,19 @@ telecom-spam-detection/
 ├── api/
 │   ├── main.py                      # FastAPI app entry point
 │   ├── models.py                    # Pydantic input/output schemas
+│   ├── Dockerfile                   # API container build instructions
 │   └── routes/
 │       ├── scoring.py               # POST /score
 │       ├── explain.py               # POST /explain
 │       └── rag.py                   # POST /query
+│
+├── dashboard/
+│   ├── app.py                       # Home page
+│   └── Pages/
+│       ├── 1_scoring.py             # Fraud Scoring page
+│       ├── 2_explain.py             # AI Explanation page
+│       ├── 3_rag.py                 # RAG Chatbot page
+│       └── 4_performance.py         # Model Performance page
 │
 ├── models/artifacts/
 │   ├── fraud_model.pkl              # Trained Random Forest
@@ -66,7 +75,60 @@ telecom-spam-detection/
 │   ├── processed/                   # Processed CSVs + plots
 │   └── raw/                         # Raw CDR data
 │
-└── docker-compose.yml               # Container orchestration
+├── docker-compose.yml               # Container orchestration
+├── .dockerignore                    # Docker ignore rules
+└── requirements.txt                 # Python dependencies
+
+---
+
+## How to Run
+
+### Prerequisites
+```bash
+pip install -r requirements.txt
+ollama pull llama3
+```
+
+### Option 1 — Docker (Recommended)
+```bash
+# Terminal 1 — FastAPI + ChromaDB containers
+docker-compose up
+
+# Terminal 2 — LLM server (outside Docker)
+ollama serve
+
+# Terminal 3 — Streamlit Dashboard
+streamlit run dashboard/app.py
+```
+
+### Option 2 — Local (without Docker)
+```bash
+# Terminal 1 — FastAPI server
+uvicorn api.main:app --reload
+
+# Terminal 2 — LLM server
+ollama serve
+
+# Terminal 3 — Streamlit Dashboard
+streamlit run dashboard/app.py
+```
+
+### Access Points
+| Service | URL |
+|---|---|
+| Streamlit Dashboard | http://localhost:8501 |
+| FastAPI Swagger UI | http://localhost:8000/docs |
+| ChromaDB (Docker) | http://localhost:8001 |
+
+---
+
+## Dashboard Pages
+| Page | Description |
+|---|---|
+| 🎯 Fraud Scoring | CDR form → fraud probability + risk level + top features |
+| 🧠 AI Explanation | LLM plain English explanation + Judge verdict |
+| 💬 RAG Chatbot | TRAI regulation queries with source citations |
+| 📊 Model Performance | SHAP beeswarm, feature importance, model comparison |
 
 ---
 
@@ -109,7 +171,7 @@ CDR data lo, fraud probability return karo.
 ```
 
 ### `POST /explain`
-Fraud score + LLM plain English explanation + Judge verdict.
+Fraud score + LLM explanation + Judge verdict.
 ```json
 // Response
 {
@@ -146,35 +208,13 @@ TRAI knowledge base se RAG-grounded answer lo.
 
 ---
 
-## How to Run
-
-### Prerequisites
-```bash
-pip install -r requirements.txt
-ollama pull llama3
-```
-
-### Start the System
-```bash
-# Terminal 1 — LLM server
-ollama serve
-
-# Terminal 2 — FastAPI server (project root se)
-uvicorn api.main:app --reload
-```
-
-### Swagger UI
-http://127.0.0.1:8000/docs
-
----
-
 ## Risk Level Logic
-| Fraud Probability | Risk Level |
-|---|---|
-| 0.0 — 0.3 | LOW |
-| 0.3 — 0.5 | MEDIUM |
-| 0.5 — 0.7 | HIGH |
-| 0.7 — 1.0 | CRITICAL |
+| Fraud Probability | Risk Level | Action |
+|---|---|---|
+| 0.0 — 0.3 | LOW | No action required |
+| 0.3 — 0.5 | MEDIUM | Monitor closely |
+| 0.5 — 0.7 | HIGH | Flag for review |
+| 0.7 — 1.0 | CRITICAL | Immediate manual review |
 
 ---
 
@@ -186,4 +226,5 @@ http://127.0.0.1:8000/docs
 | Fraud threshold | 0.3 probability |
 | Knowledge base | 15 TRAI regulation documents |
 | API endpoints | 3 (/score, /explain, /query) |
+| Dashboard pages | 4 (Scoring, Explanation, RAG, Performance) |
 | Swagger UI | http://127.0.0.1:8000/docs |
