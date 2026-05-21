@@ -1,25 +1,51 @@
 # Python
-venv/
 __pycache__/
 *.pyc
 *.pyo
-.env
+*.pyd
+.Python
 *.egg-info/
+dist/
+build/
 
-# Data files - heavy hain, GitHub pe nahi jaani
-data/raw/
-data/processed/
+# Virtual Environment
+venv/
+env/
+.venv/
 
-# Model artifacts
-models/artifacts/
-*.pkl
-
-# Mac system files
-.DS_Store
-
-# Jupyter checkpoints
+# Jupyter
 .ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# IDE
-.vscode/
+# Node
 node_modules/
+package.json
+package-lock.json
+npm-debug.log*
+
+# Docker
+*.env
+.env
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Data — raw data GitHub pe nahi jaata
+data/raw/
+
+# Models — large pkl files
+# models/artifacts/*.pkl  ← uncomment karo agar pkl files bhi ignore karni hain
+
+# Logs
+*.log
+logs/
+
+# Coverage
+.coverage
+htmlcov/
