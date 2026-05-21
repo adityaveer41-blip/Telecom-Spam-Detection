@@ -1,0 +1,27 @@
+FROM python:3.11-slim
+#Dockerhub se python 3.11 ka slim image use karo
+#slim = chota size, sirf zaroori cheezein hoti hai
+
+WORKDIR /app
+#container ke andar /app folder me kaam karo
+#jaise cd /app
+
+COPY requirements.txt .
+#pehle sirf requirements copy karo
+#Kyun? DOcker caching - agar code change ho par 
+#requirements same rahein toh pip install dobara nahi chalega 
+
+RUN pip install --no-cache-dir --timeout=300 -r requirements.txt
+#Dependencies install karo
+#--no-cache-dir = image size chota rakho
+
+COPY . .
+#Ab pura project copy karo container mein
+
+EXPOSE 8000
+#Batao ki ye container port 8000 use karta hai 
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+#Container start hone pe ye command run karo
+# --host 0.0.0.0 = bahar se accessible ho
+#(localhost sirf andar se accessible hota hai)

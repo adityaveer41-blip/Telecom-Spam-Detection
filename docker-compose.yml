@@ -1,16 +1,35 @@
-services:
-  postgres:
-    image: postgres:15
-    container_name: telecom_postgres
-    restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: telecom_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+# docker-compose.yml
+# Ek command se poora system start karo: docker-compose up
 
+services:
+
+  # SERVICE 1 — FastAPI Backend
+  api:
+    build:
+      context: .          # Project root se build karo
+      dockerfile: api/Dockerfile  # Ye Dockerfile use karo
+    container_name: telecom_api
+    restart: always
+    ports:
+      - "8000:8000"       # host:container
+    volumes:
+      - ./models:/app/models          # ML models mount karo
+      - ./data/chromadb:/app/data/chromadb  # ChromaDB data mount karo
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Ollama tak pahuncho
+
+  # SERVICE 2 — ChromaDB Vector Store
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: telecom_chromadb
+    restart: always
+    ports:
+      - "8001:8000"       # ChromaDB port 8000 pe chalta hai internally
+    volumes:
+      - chromadb_data:/chroma/chroma  # Data persist karo
+
+# Named Volumes — data persist karne ke liye
 volumes:
-  postgres_data:
+  chromadb_data:

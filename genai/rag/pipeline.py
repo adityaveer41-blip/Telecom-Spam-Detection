@@ -4,6 +4,8 @@ import requests
 import chromadb
 from chromadb.utils import embedding_functions
 
+OLLAMA_HOST = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
+
 #Importing Knowledge Base
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from knowledge_base import DOCUMENTS
@@ -107,7 +109,7 @@ QUESTION: {question}
 ANSWER(based on the documents above):"""
     #Step 4c m- llama 3 ko bhejo
     response = requests.post(
-        'http://localhost:11434/api/generate',
+    f'{OLLAMA_HOST}/api/generate',
         json={
             'model' : 'llama3',
             'prompt': rag_prompt,

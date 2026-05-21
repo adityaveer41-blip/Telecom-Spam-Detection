@@ -5,6 +5,9 @@ import json
 import pickle
 import pandas as pd
 import numpy as np
+import os
+
+OLLAMA_HOST = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
 
 
 # STEP 1 — Saved model aur features load karo
@@ -139,7 +142,7 @@ Do not use technical jargon — write in simple English.
     # Ollama locally chal raha hai port 11434 pe
 
     response = requests.post(
-        'http://localhost:11434/api/generate',
+    f'{OLLAMA_HOST}/api/generate',
         json={
             'model': 'llama3',
             'prompt': prompt,

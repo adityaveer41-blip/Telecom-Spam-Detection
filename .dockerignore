@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment — zaroorat nahi container mein
+venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+notebooks/
+
+# Git
+.git/
+.gitignore
+
+# Node (dashboard ke liye tha)
+node_modules/
+
+# Data — raw data mat bhejo, sirf processed
+data/raw/
+
+# VS Code
+.vscode/
+
+# Mac files
+.DS_Store

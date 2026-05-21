@@ -6,6 +6,8 @@ import json
 import os 
 import sys 
 
+OLLAMA_HOST = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from explainer import get_fraud_score, explain_fraud
 
@@ -52,7 +54,7 @@ SUMMARY: [one sentence overall verdict]
     
     #Step 4- LLM ko judge promt bhejo
     response= requests.post(
-        'http://localhost:11434/api/generate',
+        f'{OLLAMA_HOST}/api/generate',
         json={
             'model': 'llama3',
             'prompt': judge_prompt,
