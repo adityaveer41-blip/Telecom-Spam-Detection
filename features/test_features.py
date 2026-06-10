@@ -41,8 +41,8 @@ def apply_features(df):
     df = df.copy()
 
     # Category 1 — Call Volume
-    df['total_calls'] = (df['Day Calls'] + df['Eve Calls'] +
-                         df['Night Calls'] + df['Intl Calls'])
+    df['total_calls'] = (df['Day Calls'].squeeze() + df['Eve Calls'].squeeze() +
+                     df['Night Calls'].squeeze() + df['Intl Calls'].squeeze())
     df['total_mins'] = (df['Day Mins'] + df['Eve Mins'] +
                         df['Night Mins'] + df['Intl Mins'])
     df['total_charge'] = (df['Day Charge'] + df['Eve Charge'] +
@@ -81,12 +81,9 @@ def apply_features(df):
 
 def test_total_calls_correct():
     """total_calls = sum of all 4 call types."""
-    df = make_raw_cdr(Day_Calls=10, Eve_Calls=5, Night_Calls=3, Intl_Calls=2)
-    # Fix column names
-    df.columns = [c.replace('_', ' ') for c in df.columns]
+    df = make_raw_cdr(**{'Day Calls': 10, 'Eve Calls': 5, 'Night Calls': 3, 'Intl Calls': 2})
     result = apply_features(df)
     assert result['total_calls'].iloc[0] == 20
-
 
 def test_total_mins_correct():
     df = make_raw_cdr()
